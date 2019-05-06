@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  
+  mydb:
+    build:
+      dockerfile: ./docker/dbdocker/Dockerfile
+      context: . 
+    image: mlbarrosec/storesdb
+    container_name: dbstores
+    ports: 
+      - "3306:3306"
+    networks: 
+      - rede
+
+  
+  app:
+    build: 
+      dockerfile: ./docker/app/Dockerfile
+      context: .    
+    image: mlbarrosec/nossas-lojas    
+    container_name: nossas-lojas
+    ports: 
+      - "3000:3000"
+    networks: 
+      - rede    
+    depends_on:
+      - mydb
+    links:
+      - mydb
+    
+      
+networks: 
+  rede:
+    driver: bridge
