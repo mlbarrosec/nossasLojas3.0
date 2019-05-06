@@ -20,8 +20,6 @@ const configs_json_1 = __importDefault(require("./config/configs.json"));
 //Casse reponsavel pela consultas ao bando de dados, usando a API typeorm
 //cria uma constante de conexão como o banco de dados
 class DataBaseAdmin {
-    Conecta() {
-    }
     /*<---- SAVES IN DATABASES ------>*/
     //Função reponsavel por fazer a inserção de uma loja no banco
     insertStoreDb(body, res) {

@@ -17,8 +17,7 @@ module.exports = function() {
 
     consign()
         //include de folder controllers
-        .include('controllers') 
-        .then('persistencia')
+        .include('controllers')         
         .then('src')
         .into(app);    
     return app;
