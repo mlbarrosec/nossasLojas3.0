@@ -40,13 +40,13 @@ CREATE TABLE `city` (
 --
 
 INSERT INTO `city` (`id`, `name`, `stateId`) VALUES
-(1, 'Rio Grande Novo', 4),
-(2, 'Pelotas', 4),
-(3, 'Porto Alegre', 4),
-(4, 'Florianópolis', 5),
-(5, 'Sombrio', 5),
-(6, 'Santa Maria', 4),
-(7, 'Passo Fundo', 4);
+(1, 'Rio Grande', 1),
+(2, 'Pelotas', 1),
+(3, 'Porto Alegre', 1),
+(4, 'Florianópolis', 2),
+(5, 'Sombrio', 2),
+(6, 'Santa Maria', 1),
+(7, 'Passo Fundo', 1);
 
 -- --------------------------------------------------------
 

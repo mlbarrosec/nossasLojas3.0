@@ -18,7 +18,6 @@ const City_1 = require("./entity/City");
 const State_1 = require("./entity/State");
 const configs_json_1 = __importDefault(require("./config/configs.json"));
 //Casse reponsavel pela consultas ao bando de dados, usando a API typeorm
-//cria uma constante de conexão como o banco de dados
 class DataBaseAdmin {
     /*<---- SAVES IN DATABASES ------>*/
     //Função reponsavel por fazer a inserção de uma loja no banco
@@ -35,7 +34,6 @@ class DataBaseAdmin {
                 City_1.City,
                 State_1.State
             ],
-            synchronize: true,
         }).then((connection) => __awaiter(this, void 0, void 0, function* () {
             //pega os valores das variaveis passa no body da requisição
             let stores = new Stores_1.Stores();
@@ -77,7 +75,6 @@ class DataBaseAdmin {
                 City_1.City,
                 State_1.State
             ],
-            synchronize: true,
         }).then((connection) => __awaiter(this, void 0, void 0, function* () {
             let city = new City_1.City();
             city.name = body.cityName;
@@ -114,7 +111,6 @@ class DataBaseAdmin {
                 City_1.City,
                 State_1.State
             ],
-            synchronize: true,
         }).then((connection) => __awaiter(this, void 0, void 0, function* () {
             //coloca todas as lojas na variavel allStores
             let allStores = connection.getRepository(Stores_1.Stores);
@@ -183,7 +179,6 @@ class DataBaseAdmin {
                 City_1.City,
                 State_1.State
             ],
-            synchronize: true,
         }).then((connection) => __awaiter(this, void 0, void 0, function* () {
             //coloca todas as lojas na variavel allStores
             let allStates = connection.getRepository(State_1.State);
@@ -219,7 +214,6 @@ class DataBaseAdmin {
                 City_1.City,
                 State_1.State
             ],
-            synchronize: true,
         }).then((connection) => __awaiter(this, void 0, void 0, function* () {
             let allStores = connection.getRepository(Stores_1.Stores);
             let storeToRemove = yield allStores.findOne(id);
@@ -250,7 +244,6 @@ class DataBaseAdmin {
                 City_1.City,
                 State_1.State
             ],
-            synchronize: true,
         }).then((connection) => __awaiter(this, void 0, void 0, function* () {
             //usa o get repository, que coloca todos os valores de store em uma variavel
             //e depois busca nela os registros
@@ -288,14 +281,13 @@ class DataBaseAdmin {
                 City_1.City,
                 State_1.State
             ],
-            synchronize: true,
         }).then((connection) => __awaiter(this, void 0, void 0, function* () {
             if (body.state == undefined && body.cityes == undefined) {
                 let StoresToFind = yield connection.createQueryBuilder(Stores_1.Stores, "stores")
                     .innerJoin("stores.city", "city")
                     .innerJoin("city.state", "state")
                     .getMany();
-                if (StoresToFind != undefined) {
+                if (StoresToFind.length != 0) {
                     console.log('Loja Encontada' + JSON.stringify(StoresToFind));
                     res.send(StoresToFind);
                 }
@@ -310,7 +302,8 @@ class DataBaseAdmin {
                     .innerJoin("city.state", "state")
                     .where("state.initials in (:state)", { state: body.state })
                     .getMany();
-                if (StoresToFind != undefined) {
+                if (StoresToFind.length != 0) {
+                    console.log(StoresToFind.length);
                     console.log('Loja Encontada' + JSON.stringify(StoresToFind));
                     res.send(StoresToFind);
                 }
@@ -325,7 +318,8 @@ class DataBaseAdmin {
                     .innerJoin("city.state", "state")
                     .where("city.name in (:city) and state.initials in (:state)", { city: body.cityes, state: body.state })
                     .getMany();
-                if (StoresToFind != undefined) {
+                if (StoresToFind.length != 0) {
+                    console.log(StoresToFind.length);
                     console.log('Loja Encontada' + JSON.stringify(StoresToFind));
                     res.send(StoresToFind);
                 }

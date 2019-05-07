@@ -7,11 +7,6 @@ import configs from './config/configs.json';
 
 //Casse reponsavel pela consultas ao bando de dados, usando a API typeorm
 
-//cria uma constante de conexão como o banco de dados
- 
-
-
-
 export class DataBaseAdmin{
     
    
@@ -31,8 +26,7 @@ export class DataBaseAdmin{
                 Stores,
                 City,
                 State
-            ],
-            synchronize: true,
+            ],            
         }).then(async connection => {
             
                 //pega os valores das variaveis passa no body da requisição
@@ -78,8 +72,7 @@ export class DataBaseAdmin{
                 Stores,
                 City,
                 State
-            ],
-            synchronize: true,
+            ],            
         }).then(async connection => {           
                 
                 let city = new City();            
@@ -122,8 +115,7 @@ export class DataBaseAdmin{
                 Stores,
                 City,
                 State
-            ],
-            synchronize: true,
+            ],            
         }).then( async connection => {
             
             //coloca todas as lojas na variavel allStores
@@ -203,8 +195,7 @@ export class DataBaseAdmin{
                 Stores,
                 City,
                 State
-            ],
-            synchronize: true,
+            ],            
         }).then( async connection => {
             
             //coloca todas as lojas na variavel allStores
@@ -245,8 +236,7 @@ export class DataBaseAdmin{
                 Stores,
                 City,
                 State
-            ],
-            synchronize: true,
+            ],            
         }).then(async connection => {
             
             let allStores = connection.getRepository(Stores);
@@ -284,7 +274,7 @@ export class DataBaseAdmin{
                 City,
                 State
             ],
-            synchronize: true,
+            
         }).then(async connection => {
 
             //usa o get repository, que coloca todos os valores de store em uma variavel
@@ -329,7 +319,7 @@ export class DataBaseAdmin{
                 City,
                 State
             ],
-            synchronize: true,
+           
         }).then (async connection => {    
                 
                 if(body.state == undefined && body.cityes == undefined){
@@ -339,7 +329,7 @@ export class DataBaseAdmin{
                             .innerJoin("city.state", "state")                                
                             .getMany();
                 
-                    if(StoresToFind != undefined){
+                    if(StoresToFind.length != 0){
                         console.log('Loja Encontada'+ JSON.stringify(StoresToFind));
                         res.send(StoresToFind);
                     }else{
@@ -355,7 +345,8 @@ export class DataBaseAdmin{
                             .where("state.initials in (:state)", { state : body.state })
                             .getMany();
                     
-                    if(StoresToFind != undefined){
+                    if(StoresToFind.length != 0){
+                        console.log(StoresToFind.length);
                         console.log('Loja Encontada'+ JSON.stringify(StoresToFind));
                         res.send(StoresToFind);
                     }else{
@@ -371,7 +362,8 @@ export class DataBaseAdmin{
                             .where("city.name in (:city) and state.initials in (:state)", { city : body.cityes, state : body.state })
                             .getMany();
                     
-                    if(StoresToFind != undefined){
+                    if(StoresToFind.length != 0 ){
+                        console.log(StoresToFind.length);
                         console.log('Loja Encontada'+ JSON.stringify(StoresToFind));
                         res.send(StoresToFind);
                     }else{

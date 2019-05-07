@@ -1,12 +1,8 @@
-//DEfinição de rotas
+//Definição de rotas
 
 module.exports = function(app) {
     
-    //use requisition of type get
-    /*app.get("/stores" , function(req,res){
-        res.send('OK');
-    });*/
-
+    
     //Metodo POST para adiciona lojas no banco
     app.post("/stores/store",function(req,res){
 
