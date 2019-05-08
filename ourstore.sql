@@ -146,8 +146,7 @@ ALTER TABLE `stores`
   ADD KEY `FK_2d4b77997b25a4c1e6d04f2579b` (`cityId`);
 
 --
--- AUTO_INCREMENT for dumped tables
---
+-- AUTO_INCREMENT for dumped tables--
 
 --
 -- AUTO_INCREMENT for table `city`
